@@ -9,10 +9,9 @@ class ContactItem extends Component {
     };
   }
 
-  onShowClick = () => {
+  handleShowContactInfo = () =>
     this.setState({ showContactInfo: !this.state.showContactInfo });
-    console.log(this.state.showContactInfo);
-  };
+  handleDeleteContact = () => this.props.handleDeleteContact(this.props.id);
 
   render() {
     const { name, mail, phone, address, mutualContacts } = this.props;
@@ -21,10 +20,17 @@ class ContactItem extends Component {
         <h4>
           {name}{" "}
           {this.state.showContactInfo ? (
-            <i className="fas fa-angle-down" onClick={this.onShowClick} />
+            <i
+              className="fas fa-angle-down"
+              onClick={this.handleShowContactInfo}
+            />
           ) : (
-            <i className="fas fa-angle-right" onClick={this.onShowClick} />
+            <i
+              className="fas fa-angle-right"
+              onClick={this.handleShowContactInfo}
+            />
           )}{" "}
+          <i className="fas fa-times" onClick={this.handleDeleteContact} />
         </h4>
         {this.state.showContactInfo && (
           <React.Fragment>
@@ -35,14 +41,18 @@ class ContactItem extends Component {
                 address.city
               }`}</li>
             </ul>
-            <label>Mutual Contacts</label>
-            <ul className="list-group">
-              {mutualContacts.map(contact => (
-                <li className="list-group-item" key={contact}>
-                  {contact}
-                </li>
-              ))}
-            </ul>
+            {mutualContacts.length !== 0 && (
+              <React.Fragment>
+                <label>Mutual Contacts</label>
+                <ul className="list-group">
+                  {mutualContacts.map(contact => (
+                    <li className="list-group-item" key={contact}>
+                      {contact}
+                    </li>
+                  ))}
+                </ul>
+              </React.Fragment>
+            )}
           </React.Fragment>
         )}
       </div>

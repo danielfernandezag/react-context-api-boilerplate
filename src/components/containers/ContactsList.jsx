@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ContactItem from "../common/ContactItem";
+import { Consumer } from '../../context/context';
 import { Contacts } from "../../requests/dummyContacts";
 
 export default class ContactsList extends Component {
@@ -8,6 +9,13 @@ export default class ContactsList extends Component {
     this.state = {
       contacts: Contacts
     }
+  }
+
+  handleDeleteContact = (id) => {
+    const indexToDelete = this.state.contacts.findIndex(contact => contact.id === id);
+    let auxContacts = this.state.contacts;
+    auxContacts.splice(indexToDelete,1);
+    this.setState({ contacts: auxContacts });
   }
 
   getMutualContacts = id => {
@@ -23,20 +31,28 @@ export default class ContactsList extends Component {
   };
 
   render() {
-    const { contacts } = this.state;
     return (
-      <div>
-        {contacts.map(contact => (
-          <ContactItem
-            key={contact.id}
-            name={contact.name}
-            mail={contact.mail}
-            phone={contact.phone}
-            address={contact.address}
-            mutualContacts={this.getMutualContacts(contact.id)}
-          />
-        ))}
-      </div>
+      <Consumer>
+        {value => {
+           const { contacts } = value;
+          return(
+            <React.Fragment>
+            {contacts.map(contact => (
+              <ContactItem
+                key={contact.id}
+                id={contact.id}
+                name={contact.name}
+                mail={contact.mail}
+                phone={contact.phone}
+                address={contact.address}
+                mutualContacts={this.getMutualContacts(contact.id)}
+                handleDeleteContact={this.handleDeleteContact}
+              />
+            ))}
+          </React.Fragment>
+          );
+        }}
+      </Consumer>
     );
   }
 }
