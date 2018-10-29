@@ -46,5 +46,5 @@ export const Contacts = [
     phone: "999-999-9999",
     address: { st: "Linus #123", city: "Montreal" },
     mutualContacts: [2, 4]
-  },
+  }
 ];

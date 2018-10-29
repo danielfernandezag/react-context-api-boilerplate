@@ -3,7 +3,6 @@ import ContactItem from "../common/ContactItem";
 import { Consumer } from "../../context/context";
 
 export default class ContactsList extends Component {
-  
   getMutualContacts = (contacts, id) => {
     const currentContact = contacts.find(item => item.id === id);
     const mutualContacts = currentContact.mutualContacts;
@@ -31,7 +30,7 @@ export default class ContactsList extends Component {
                   mail={contact.mail}
                   phone={contact.phone}
                   address={contact.address}
-                  mutualContacts={this.getMutualContacts(contacts,contact.id)}
+                  mutualContacts={this.getMutualContacts(contacts, contact.id)}
                 />
               ))}
             </React.Fragment>
