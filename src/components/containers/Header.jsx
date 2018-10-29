@@ -4,27 +4,27 @@ import PropTypes from "prop-types";
 const Header = props => {
   const { title } = props;
   return (
-    <nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-3 py-3">
+    <nav className="navbar navbar-expand-md navbar-dark bg-primary mb-3 py-3">
       <div className="container">
         <a href="/" className="navbar-brand">
           {title}
         </a>
       </div>
       <div>
-        <ul className="navbar-nav mr-auto">
+        <ul className="navbar-nav justify-content-end">
           <li className="navbar-item">
-            <a href="/" className="nav-link">
+            <a href="/" className="nav-link active">
               Home
             </a>
           </li>
           <li className="navbar-item">
-            <a href="/" className="nav-link">
-              Link1
+            <a href="/" className="nav-link active">
+              Add
             </a>
           </li>
           <li className="navbar-item">
-            <a href="/" className="nav-link">
-              Link2
+            <a href="/" className="nav-link active">
+              About
             </a>
           </li>
         </ul>
